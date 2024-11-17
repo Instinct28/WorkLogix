@@ -1,13 +1,13 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable import/extensions */
-import express from "express";
-import dotenv from "dotenv";
-import mongoose from "mongoose";
-import cors from "cors";
-import morgan from "morgan";
-import authRoutes from "./routes/auth.js";
-import adminRoutes from "./routes/admins.js";
-import employeeRoutes from "./routes/employee.js";
+const express = require("express");
+const dotenv = require("dotenv");
+const mongoose = require("mongoose");
+const cors = require("cors");
+const morgan = require("morgan");
+const authRoutes = require("./routes/auth.js");
+const adminRoutes = require("./routes/admin.js");
+const employeeRoutes = require("./routes/employee.js");
 
 const app = express();
 dotenv.config();
@@ -27,7 +27,7 @@ const connect = () => {
   mongoose
     .connect(process.env.MONGO_URL)
     .then(() => {
-      console.log("MongoDB connected");
+      console.log("Database connected");
     })
     .catch((err) => {
       console.log(err);
@@ -53,6 +53,6 @@ app.use((err, req, res, next) => {
 app.use(express.json());
 
 app.listen(port, () => {
-  console.log("Connected");
+  console.log(`Server started at ${port}`);
   connect();
 });
